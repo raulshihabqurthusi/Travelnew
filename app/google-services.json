@@ -1,33 +1,57 @@
 {
   "project_info": {
-    "project_number": "968960283578",
-    "project_id": "travel-fc437",
-    "storage_bucket": "travel-fc437.appspot.com"
+    "project_number": "362765224406",
+    "project_id": "travel-art",
+    "storage_bucket": "travel-art.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:968960283578:android:1d7722d898fb0f96c14383",
+        "mobilesdk_app_id": "1:362765224406:android:95712840a7eaf5cd40fc77",
         "android_client_info": {
           "package_name": "com.example.travel"
         }
       },
       "oauth_client": [
         {
-          "client_id": "968960283578-4cg7t9dvc5u08kdirdnfjolisap1h8uc.apps.googleusercontent.com",
+          "client_id": "362765224406-89nelc4uaoe9pnq9m09uhuu8j9tcbel4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.travel",
+            "certificate_hash": "340b29c401e40e790d14823666bd2091b45afa63"
+          }
+        },
+        {
+          "client_id": "362765224406-daklbbolredl40onogbh1bipnh8kprjl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.travel",
+            "certificate_hash": "37473e806681c1d7c16258696e8b907db8432e42"
+          }
+        },
+        {
+          "client_id": "362765224406-vva05fqjrmhrge6k31muhip3hrrl2cd5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.travel",
+            "certificate_hash": "c526201861019882e58e6b3c9db084edf97e0db3"
+          }
+        },
+        {
+          "client_id": "362765224406-re5t7b6j89335pb61a8r2jnkid3av1ec.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyASB4CorF8q0SUuULPSMmN_Mb-C8ze68eg"
+          "current_key": "AIzaSyCEIY6r8k8Y8hkjZCLGcfVvxZ5mOY9ydiw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "968960283578-4cg7t9dvc5u08kdirdnfjolisap1h8uc.apps.googleusercontent.com",
+              "client_id": "362765224406-ph88dfh9b0209rtl92d4ge1srj72tt5l.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

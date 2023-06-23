@@ -17,6 +17,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -29,6 +31,7 @@ public class LoginSignupActivity extends AppCompatActivity implements View.OnCli
     GoogleSignInClient googleSignInClient;
     FirebaseAuth auth;
     ProgressBar loading;
+    private static final int RC_SIGN_IN = 9001;
 
     @Override
     protected void onStart() {
@@ -57,28 +60,30 @@ public class LoginSignupActivity extends AppCompatActivity implements View.OnCli
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 100) {
+        System.out.println("Result Sign In: "+requestCode);
+        if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> signInAccountTask = GoogleSignIn.getSignedInAccountFromIntent(data);
-            if (signInAccountTask.isSuccessful()) {
-                try {
-                    GoogleSignInAccount googleSignInAccount = signInAccountTask.getResult(ApiException.class);
-                    AuthCredential authCredential = GoogleAuthProvider.getCredential(googleSignInAccount.getIdToken(), null);
-                    auth.signInWithCredential(authCredential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
+            System.out.println("Result Sign In signInAccountTask Success: "+signInAccountTask.isSuccessful());
+            try {
+                GoogleSignInAccount account = signInAccountTask.getResult(ApiException.class);
+                AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+                auth.signInWithCredential(credential)
+                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                            @Override
+                            public void onSuccess(AuthResult authResult) {
                                 loading.setVisibility(View.GONE);
                                 startActivity(new Intent(LoginSignupActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                                 finish();
-                            } else {
-                                loading.setVisibility(View.GONE);
-                                Toast.makeText(LoginSignupActivity.this, "Authentication Failed : " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
-                        }
-                    });
-                } catch (ApiException e) {
-                    e.printStackTrace();
-                }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                loading.setVisibility(View.GONE);
+                                Toast.makeText(LoginSignupActivity.this, "Authentication Failed : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            } catch (ApiException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -95,6 +100,7 @@ public class LoginSignupActivity extends AppCompatActivity implements View.OnCli
 
     private void signin() {
         Intent intent = googleSignInClient.getSignInIntent();
-        startActivityForResult(intent, 100);
+        startActivityForResult(intent, RC_SIGN_IN);
+        System.out.println("Result Sign In: signin start");
     }
 }
